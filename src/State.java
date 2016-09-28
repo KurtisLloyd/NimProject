@@ -32,4 +32,8 @@ public class State {
     public void setAverage(float average) {
         this.average = average;
     }
+
+    public String toString(){
+        return top + "\n" + mid + "\n"+ bot + "\n -----";
+    }
 }
