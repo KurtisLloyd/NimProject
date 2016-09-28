@@ -1,0 +1,159 @@
+package com.neumont.csc130.Nim;
+/*
+ * created by Erick Negrete on 9/27/2016
+ */
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+
+	static Scanner scan = new Scanner(System.in);
+    static Random gen = new Random();
+	public static int playerTurn;
+	public static int gameMode;
+	public static void main(String[] args) {
+		run();
+
+	}
+	public static void run(){
+		gameMaster();
+	}
+	public static void gameMaster(){
+		int firstID = gen.nextInt(2) + 1;
+		playerTurn = firstID;
+		System.out.println("First Player What is your name?");
+		String firstName = scan.nextLine();
+		Player first = new Player(firstName, firstID);
+		int secondID = 0;
+		if (firstID == 1){
+			secondID = firstID + 1;
+		}
+		else{
+			secondID = firstID - 1;
+		}
+		System.out.println("Second Player What is your name?");
+		String secondName = scan.nextLine();
+		Player second = new Player(secondName, secondID);
+		String[] options = null;
+		options[0] = "1: Player vs. Player";// check this the thing may not actually be working as the space my be getting taken by the null initializer.
+		options[1] = "2: Player vs. CPU";
+		options[2] = "3: CPU vs. CPU";
+		int modeSelected = promptForMenuSelection(options, true);
+		boolean gameOver = false;
+		if (modeSelected == 1){
+			while(!gameOver){
+				if(firstID == 1){
+					playerTurn(firstName);
+				}
+				else{
+					playerTurn(secondName);
+				}
+			}
+			
+		
+		}
+		else if (modeSelected == 2){
+			
+		}
+		else{
+			promptForInt("How many matches would you like the CPUs to complete?", 1, 100000);
+		}
+		BrainAI brain = new BrainAI();
+		brain.AIMakeTurn();
+	}
+	
+	public static void playerTurn(String name){
+		while(isValidMove() == false){
+		promptForRow(name);
+		promptForAmount(name);
+		}
+	}
+	public static int promptForRow(String name){
+		int row = promptForInt(name + " it is your turn what row would you like to take from?", 1, 3);
+		return row;
+	}
+	
+	public static int promptForAmount(String name){
+		int amount = promptForInt(name + " it is your turn what row would you like to take from?", 1, 3);
+		return amount;
+	}
+	
+	public static boolean isValidMove(){
+		boolean validOrNah = false;
+		return validOrNah;
+	}
+	
+	public static int promptForMenuSelection(String[] options, boolean withQuit) {
+
+		boolean menuQuit = false;
+		boolean validInput = false;
+		System.out.print("Please select an option(a number)! " + Arrays.toString(options));
+		if (withQuit){
+			System.out.println(" If you would like to quit press 0");
+		}
+		Scanner scan = new Scanner(System.in);
+		int optionNum = 0;
+		String optionSelected = scan.nextLine();
+		optionNum = Integer.parseInt(optionSelected);
+		while(!validInput){
+		if (withQuit){
+			System.out.println(optionNum);
+			if (optionNum == 0){
+				menuQuit = true;
+				System.out.println("menuQuit selected");
+				validInput = true;
+			} else if(optionNum >= 1 && optionNum <= options.length){
+				validInput = true;
+			}
+			else {
+				menuQuit = false;
+				validInput = false;
+				System.out.println("invalid input!");
+				optionSelected = scan.nextLine();
+				optionNum = Integer.parseInt(optionSelected);
+			}
+		}
+		else{
+		if (optionNum == 0){
+				validInput = false;
+				System.out.println("please input a number corresponding with the option");
+				optionSelected = scan.nextLine();
+				optionNum = Integer.parseInt(optionSelected);
+			} else if (optionNum >= 1 && optionNum <= options.length){
+				validInput = true;
+			}
+		else {
+			validInput = false;
+			System.out.println("invalid input!");
+			optionSelected = scan.nextLine();
+			optionNum = Integer.parseInt(optionSelected);
+		}
+		}
+		}
+		
+		return optionNum;
+	}
+	public static int promptForInt(String prompt, int min, int max) {
+
+		System.out.println(prompt + min + " and " + max);
+		Scanner scan = new Scanner(System.in);
+		int I = 0;
+
+		boolean correctIn = false;
+		while(!correctIn){
+			String integ = scan.nextLine();
+			I = Integer.parseInt(integ);
+			if (I >= min && I <= max){
+				correctIn = true;
+			}else {
+					System.out.println("Incorrect response! Please Try again");
+					correctIn = false;
+
+				}
+			}
+		return I;
+		
+	}
+
+}
