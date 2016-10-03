@@ -1,0 +1,51 @@
+package com.neumont.csc130.Nim;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class PvPGame {
+
+	Scanner scan = new Scanner(System.in);
+    static Random gen = new Random();
+   
+    static int TOP = 3;
+    static int MID = 5;
+    static int BOT = 7;
+	static int playerTurn;
+	static int gameMode;
+	static int playerID = gen.nextInt(2) + 1;
+	UserInputs userinputs = new UserInputs();
+
+
+public  void playerTurn(String name){
+	userinputs.promptForRow(name);
+	userinputs.promptForAmount(name);
+}
+
+public  boolean gameOver(){
+	boolean output = false;
+	if((1 >= TOP) && (1 >= MID) && (1 >= BOT)){
+		output = true;
+		System.out.println("Now I commit seppuku!!!!!");
+	}
+	else{
+		output = false;
+	}
+	return output;
+	
+}
+public void playGame(Player one, Player two){
+	while(!gameOver()){
+		if(playerID == 1){
+			
+			playerTurn(one.getName());
+			playerID += 1;
+		}
+		else{
+			
+			playerTurn(two.getName());
+			playerID -= 1;
+		}
+	}
+}
+}
