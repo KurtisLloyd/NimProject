@@ -4,25 +4,21 @@ import java.util.List;
  * Created by Kurtis Lloyd on 9/26/2016.
  */
 public class Player {
-    boolean isPlayerTurn;
 
-    public Player(){
+    private String name;
+    private int id;
 
+
+    public Player(String name, int id){
+        this.name = name;
+        this.id = id;
     }
 
-    public boolean isPlayerTurn() {
-        return isPlayerTurn;
+    public String getName(){
+        return name;
+    }
+    public int getID(){
+        return id;
     }
 
-    public void setPlayerTurn(boolean playerTurn) {
-        isPlayerTurn = playerTurn;
-    }
-
-    public void select(State state, List<State> states){
-        for (State s : states) {
-            if(state == s){
-                states.remove(state);
-            }
-        }
-    }
 }

@@ -7,12 +7,8 @@ import java.util.List;
 public class Main {
 
     public static void main(String [] args){
-        Game game = new Game();
-        List<State> states = game.populateStates();
-        for (State s:states
-             ) {
-            System.out.println(s.toString());
-        }
+      GameMaster master = new GameMaster();
+        master.ChooseGame();
 
     }
 }

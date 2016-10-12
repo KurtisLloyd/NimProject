@@ -23,7 +23,7 @@ public static List<State> ALLSTATES;
         ALLSTATES = populateStates();
         List<State> states = ALLSTATES;
             int game = games - 1;
-        Player player1 = new Player();
+
 
         for(int i =states.size(); i < 0; i--) {
 
